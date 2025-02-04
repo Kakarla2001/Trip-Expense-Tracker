@@ -71,3 +71,31 @@ function clearSelections() {
         checkbox.checked = false;
     });
 }
+function addExpense() {
+    const tripName = new URLSearchParams(window.location.search).get("trip");
+    const payer = document.getElementById("payerSelect").value;
+    const amount = parseFloat(document.getElementById("amount").value);
+    const recipients = Array.from(document.querySelectorAll("#forSelectContainer input[type=checkbox]:checked"))
+                           .map(checkbox => checkbox.value);
+
+    if (!payer) {
+        alert("Please select a payer!");
+        return;
+    }
+
+    if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount!");
+        return;
+    }
+
+    if (recipients.length === 0) {
+        alert("Please select at least one recipient!");
+        return;
+    }
+
+    let expenses = JSON.parse(localStorage.getItem(`expenses_${tripName}`)) || [];
+    expenses.push({ payer, amount, recipients });
+    localStorage.setItem(`expenses_${tripName}`, JSON.stringify(expenses));
+
+    loadExpenses(tripName);
+}
