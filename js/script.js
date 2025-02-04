@@ -110,3 +110,36 @@ function loadExpenses(tripName) {
         expenseList.appendChild(li);
     });
 }
+function calculateSettlement() {
+    const tripName = new URLSearchParams(window.location.search).get("trip");
+    let persons = JSON.parse(localStorage.getItem(`persons_${tripName}`)) || [];
+    let expenses = JSON.parse(localStorage.getItem(`expenses_${tripName}`)) || [];
+    
+    let balances = {};
+    persons.forEach(person => balances[person] = 0);
+
+    expenses.forEach(exp => {
+        let share = exp.amount / exp.recipients.length;
+        balances[exp.payer] += exp.amount;
+        exp.recipients.forEach(person => balances[person] -= share);
+    });
+
+    let settlementList = document.getElementById("settlementList");
+    settlementList.innerHTML = "";
+
+    let creditors = Object.entries(balances).filter(([_, bal]) => bal > 0);
+    let debtors = Object.entries(balances).filter(([_, bal]) => bal < 0);
+
+    while (debtors.length > 0 && creditors.length > 0) {
+        let [debtor, debt] = debtors.pop();
+        let [creditor, credit] = creditors.pop();
+
+        let settlementAmount = Math.min(-debt, credit);
+        let li = document.createElement("li");
+        li.textContent = `${debtor} pays ₹${settlementAmount.toFixed(2)} to ${creditor}`;
+        settlementList.appendChild(li);
+
+        if (-debt > credit) debtors.push([debtor, debt + settlementAmount]);
+        if (credit > -debt) creditors.push([creditor, credit - settlementAmount]);
+    }
+}
