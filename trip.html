@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2 id="tripTitle"></h2>
+        <button onclick="goBack()">Back to Home</button>
+
+        <div id="personsSection">
+        <h2>Add Persons</h2>
+        <input type="text" id="personName" placeholder="Enter person Name">
+        <button onclick="addPerson()">Add Person</button>
+        <ul id="personList"></ul>
+        </div>
+
+        <div id="expensesSection">
+        <h2>Add Expense</h2>
+        <label>Payer:</label>
+        <select id="payerSelect"></select>
+        <label>Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+        <label>For:</label>
+        <div id="forSelectContainer"></div>
+        <button onclick="clearSelections()">Clear Selection</button>
+        <button onclick="addExpense()">Add Expense</button>
+        <ul id="expenseList"></ul>
+        </div>
+
+        <div id="settlementsSection">
+            <h2>Settlement Calculation</h2>
+            <button onclick="calculateSettlement()">Calculate</button>
+            <ul id="settlementList"></ul>
+        </div>
+
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
