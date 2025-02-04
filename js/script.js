@@ -66,3 +66,8 @@ function loadPersons(tripName) {
         forSelectContainer.appendChild(checkboxDiv);
     });
 }
+function clearSelections() {
+    document.querySelectorAll("#forSelectContainer input[type=checkbox]").forEach(checkbox => {
+        checkbox.checked = false;
+    });
+}
