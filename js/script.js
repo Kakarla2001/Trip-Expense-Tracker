@@ -99,3 +99,14 @@ function addExpense() {
 
     loadExpenses(tripName);
 }
+function loadExpenses(tripName) {
+    let expenses = JSON.parse(localStorage.getItem(`expenses_${tripName}`)) || [];
+    let expenseList = document.getElementById("expenseList");
+    expenseList.innerHTML = "";
+
+    expenses.forEach(exp => {
+        let li = document.createElement("li");
+        li.textContent = `${exp.payer} paid ₹${exp.amount.toFixed(2)} for ${exp.recipients.join(", ")}`;
+        expenseList.appendChild(li);
+    });
+}
