@@ -12,3 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     loadPersons(tripName);
     loadExpenses(tripName);
 });
+function goBack() {
+    window.location.href = "index.html";
+}
