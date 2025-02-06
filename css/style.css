@@ -2,14 +2,39 @@ body{
     font-family: arial,sans-serif;
     text-align: center;
     background-color: #add58c;
+    padding: 0;
+    margin: 0;
+    /* overflow-y: hidden; */
 }
-.container{
+.mainContainer{
+    display: flex;
     min-width: 600px;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    margin: 20px auto;
+    text-align: center;
+    
+    /* min-width: 600px;
     padding: 10px;
     background: white;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(233, 164, 164, 0.907);
+    border-radius: 10px; */
+    position: relative;
+   
+}
+.backToHome{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
 }
 h2{
     color: green;
@@ -33,9 +58,13 @@ button:hover {
 ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 li {
-    background: #e0ffe0;
+    width: 30%;
+    background: #add58c;
     padding: 8px;
     margin: 5px 0;
     border-radius: 5px;
@@ -55,4 +84,15 @@ li {
     text-decoration: none;
     color: green;
     font-size: 18px;
+}
+#tripTitle{
+   margin-top: -5px;
+   color: #fff;
+}
+.tripContainer{
+    background-color: green;
+    height: 30px;
+    width: 90px;
+    margin: auto;
+    border-radius: 10px;
 }
